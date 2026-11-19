@@ -1,3 +1,5 @@
+<img width="1280" height="640" alt="AI-B2B-Skill" src="https://github.com/user-attachments/assets/379b94da-54a3-4052-ae57-257342cdec28" />
+
 # LinkedIn Cold Outreach: AI B2B Lead Research Skill for Claude
 
 A Claude skill that studies **your LinkedIn profile**, works out what you can offer, and builds a researched, scored list of prospects who are likely to need your services. For the best prospects it drafts personalized outreach for you to review.
