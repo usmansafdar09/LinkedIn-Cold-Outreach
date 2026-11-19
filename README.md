@@ -11,24 +11,60 @@ It is built for freelancers and consultants selling **Data Analytics & Engineeri
 ## Flow
 
 ```mermaid
-flowchart TD
-    A([Run /linkedin-cold-outreach]) --> B["1. Analyze your LinkedIn profile<br/>headline, About, experience, skills,<br/>projects, posts"]
-    B --> C["Map your service areas<br/>Data Analytics & Engineering<br/>Workflow & Business Automation"]
-    C --> D["2. Identify potential clients<br/>Founders, CEOs, CTOs, Heads of Data,<br/>Ops managers, agency owners"]
-    D --> E["3. Research each prospect<br/>profile, company, size, business model,<br/>signals of a data or automation need"]
-    E --> F{"Identifiable<br/>business problem?"}
-    F -- No --> X[Exclude]
-    F -- Yes --> G["4. Score out of 100"]
-    G --> H{Score}
-    H -- "80-100" --> P1[High priority]
-    H -- "60-79" --> P2[Potential]
-    H -- "40-59" --> P3[Low priority]
-    H -- "below 40" --> X
-    P1 --> I["5. Output table<br/>13 fields per lead"]
-    P2 --> I
-    P3 --> I
-    P1 --> J["6. Outreach drafts<br/>connection note, follow-up,<br/>service offer, conversation starter"]
-    J --> K([You review and send manually])
+flowchart TB
+    START(["▶ Run /linkedin-cold-outreach"])
+
+    subgraph S1["① UNDERSTAND YOU"]
+        direction TB
+        A1["👤 Read LinkedIn profile<br/>headline · About · experience<br/>skills · projects · posts"]
+        A2["🧩 Map your services<br/>Data Analytics & Engineering<br/>Workflow & Business Automation"]
+        A1 --> A2
+    end
+
+    subgraph S2["② FIND PROSPECTS"]
+        direction TB
+        B1["🎯 Target decision-makers<br/>Founders · CEOs · CTOs<br/>Heads of Data · Ops Managers"]
+        B2["🔎 Research each prospect<br/>profile · company · size<br/>business model · need signals"]
+        B1 --> B2
+    end
+
+    subgraph S3["③ QUALIFY & SCORE"]
+        direction TB
+        C1{"Clear business<br/>problem found?"}
+        C2["📊 Score out of 100<br/>Relevance 30 · Problem 30<br/>Authority 20 · Company 10 · Access 10"]
+        C1 -- "Yes" --> C2
+    end
+
+    subgraph S4["④ DELIVER"]
+        direction TB
+        D1["📋 Ranked lead table<br/>13 fields per lead"]
+        D2["✉️ Outreach drafts<br/>connection note · follow-up<br/>offer · conversation starter"]
+        D3(["🙋 You review & send manually"])
+        D1 --> D2 --> D3
+    end
+
+    EXC["🚫 Excluded<br/>no problem or score below 40"]
+
+    START --> S1 --> S2 --> S3
+    C1 -- "No" --> EXC
+    C2 -- "40 and above" --> S4
+
+    classDef start fill:#1f6feb,stroke:#0b3d91,color:#ffffff,stroke-width:2px
+    classDef step fill:#e8f1ff,stroke:#1f6feb,color:#0b2545,stroke-width:1.5px
+    classDef decision fill:#fff4d6,stroke:#d29922,color:#4a3500,stroke-width:1.5px
+    classDef out fill:#e3f8e9,stroke:#2da44e,color:#0b3d1c,stroke-width:1.5px
+    classDef stop fill:#ffe5e5,stroke:#cf222e,color:#5c0a12,stroke-width:1.5px
+
+    class START start
+    class A1,A2,B1,B2,C2 step
+    class C1 decision
+    class D1,D2,D3 out
+    class EXC stop
+
+    style S1 fill:#f6f8fa,stroke:#8c959f,stroke-dasharray: 5 3
+    style S2 fill:#f6f8fa,stroke:#8c959f,stroke-dasharray: 5 3
+    style S3 fill:#f6f8fa,stroke:#8c959f,stroke-dasharray: 5 3
+    style S4 fill:#f6f8fa,stroke:#8c959f,stroke-dasharray: 5 3
 ```
 
 ---
@@ -61,21 +97,67 @@ High-priority leads also get a personalized connection request, a follow-up mess
 ## How anyone can use this skill on their own Claude
 
 ```mermaid
-flowchart TD
-    A([Find this repo on GitHub]) --> B[Download ZIP or git clone]
-    B --> C["Open linkedin-cold-outreach/SKILL.md<br/>and edit it for YOUR services"]
-    C --> D["Zip the linkedin-cold-outreach folder<br/>SKILL.md directly inside"]
-    D --> E{Where do you use Claude?}
-    E -- "Claude web / desktop" --> F["Settings -> Capabilities -> Skills<br/>-> Upload skill -> choose the zip"]
-    E -- "Claude Code" --> G["Copy folder to<br/>~/.claude/skills/"]
-    F --> H["Give Claude access to YOUR LinkedIn profile<br/>(browser access, or paste headline / About / Experience)"]
-    G --> H
-    H --> I["Type /linkedin-cold-outreach<br/>(optionally add region, industry, company size)"]
-    I --> J["Claude analyzes your profile<br/>and researches prospects"]
-    J --> K["Review ranked lead table<br/>+ outreach drafts"]
-    K --> L["Edit drafts, then send manually on LinkedIn"]
-    L --> M["Tell Claude what worked<br/>and re-run with a sharper target"]
-    M -.-> I
+flowchart TB
+    START(["🌐 Find this repo on GitHub"])
+
+    subgraph G1["① GET THE SKILL"]
+        direction TB
+        A1["⬇️ Option A: download<br/>linkedin-cold-outreach.skill"]
+        A2["📦 Option B: Download ZIP or git clone,<br/>then zip the linkedin-cold-outreach folder"]
+    end
+
+    subgraph G2["② MAKE IT YOURS"]
+        direction TB
+        B1["✏️ Edit SKILL.md<br/>§1 your services<br/>§2 your target titles & pains<br/>§4 scoring weights"]
+    end
+
+    subgraph G3["③ INSTALL"]
+        direction TB
+        C1["🖥️ Claude web / desktop<br/>Settings → Capabilities → Skills<br/>→ Upload skill"]
+        C2["⌨️ Claude Code<br/>copy folder to<br/>~/.claude/skills/"]
+    end
+
+    subgraph G4["④ RUN"]
+        direction TB
+        D1["🔗 Give Claude your LinkedIn profile<br/>browser access or paste your text"]
+        D2["▶️ Type /linkedin-cold-outreach<br/>add region · industry · company size"]
+        D1 --> D2
+    end
+
+    subgraph G5["⑤ ACT & IMPROVE"]
+        direction TB
+        E1["📋 Review ranked leads<br/>and outreach drafts"]
+        E2["✉️ Edit and send manually on LinkedIn"]
+        E3["🔁 Report what worked<br/>and re-run with a sharper target"]
+        E1 --> E2 --> E3
+    end
+
+    START --> G1 --> G2
+    G2 --> C1
+    G2 --> C2
+    C1 --> G4
+    C2 --> G4
+    G4 --> G5
+    E3 -. "refine" .-> D2
+
+    classDef start fill:#1f6feb,stroke:#0b3d91,color:#ffffff,stroke-width:2px
+    classDef step fill:#e8f1ff,stroke:#1f6feb,color:#0b2545,stroke-width:1.5px
+    classDef edit fill:#fff4d6,stroke:#d29922,color:#4a3500,stroke-width:1.5px
+    classDef install fill:#f3e8ff,stroke:#8250df,color:#2d1352,stroke-width:1.5px
+    classDef out fill:#e3f8e9,stroke:#2da44e,color:#0b3d1c,stroke-width:1.5px
+
+    class START start
+    class A1,A2 step
+    class B1 edit
+    class C1,C2 install
+    class D1,D2 step
+    class E1,E2,E3 out
+
+    style G1 fill:#f6f8fa,stroke:#8c959f,stroke-dasharray: 5 3
+    style G2 fill:#f6f8fa,stroke:#8c959f,stroke-dasharray: 5 3
+    style G3 fill:#f6f8fa,stroke:#8c959f,stroke-dasharray: 5 3
+    style G4 fill:#f6f8fa,stroke:#8c959f,stroke-dasharray: 5 3
+    style G5 fill:#f6f8fa,stroke:#8c959f,stroke-dasharray: 5 3
 ```
 
 ### Step by step
