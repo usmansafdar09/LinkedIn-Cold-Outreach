@@ -2,7 +2,7 @@
 
 A Claude skill that studies **your LinkedIn profile**, works out what you can offer, and builds a researched, scored list of prospects who are likely to need your services. For the best prospects it drafts personalized outreach for you to review.
 
-It is built for freelancers and consultants selling **Data Analytics & Engineering** (BI, ETL, Python, SQL) and **Workflow Automation** (n8n, AI agents, API integrations). You can adapt it to your own services (see [Customize it](#customize-it-for-your-own-services)).
+It is built for freelancers and consultants selling **Data Analytics & Engineering** (BI, ETL, Python, SQL) and **Workflow Automation** (n8n, AI agents, API integrations). You can adapt it to your own services.
 
 > It does research and drafting only. It never sends connection requests, messages or emails on your behalf.
 
